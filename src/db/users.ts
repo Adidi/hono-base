@@ -11,8 +11,10 @@ export const getUser = async (id: number) => {
 };
 
 export const createUser = async (name: string, email: string, age: number) => {
+	const nextId = Math.max(...users.map(u => u.id)) + 1;
+
 	const user: User = {
-		id: users.at(-1)!.id + 1,
+		id: nextId,
 		name,
 		email,
 		age,
