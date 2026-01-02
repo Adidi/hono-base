@@ -10,3 +10,8 @@ JWT_SECRET=jwt_encode_secret_key
 ```
 
 notice those variables are mandatory and type safe using zod ([src/env.ts](https://github.com/Adidi/hono-base/blob/main/src/env.ts) file)
+
+```
+npm install
+npm run dev
+```
