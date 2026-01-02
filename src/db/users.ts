@@ -22,3 +22,11 @@ export const createUser = async (name: string, email: string, age: number) => {
 	users.push(user);
 	return user;
 };
+
+export const deleteUser = async (id: number) => {
+	const idx = users.findIndex(u => u.id === id);
+	if (idx !== -1) {
+		users.splice(idx, 1);
+	}
+	return true;
+};

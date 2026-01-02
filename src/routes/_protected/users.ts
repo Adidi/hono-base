@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { HTTPException } from 'hono/http-exception';
 import factory from '@/factory';
 import { zv } from '@/middlewares';
-import { getUser, getUsers, createUser } from '@/db/users';
+import { getUser, getUsers, createUser, deleteUser } from '@/db/users';
 
 const users = factory.createApp();
 
@@ -67,6 +67,23 @@ users.post(
 		const user = await createUser(name, email, age);
 
 		return c.json(user);
+	}
+);
+
+users.delete(
+	'/:id',
+	zv(
+		'param',
+		z.object({
+			id: z.coerce.number().int().min(1)
+		})
+	),
+	async c => {
+		const { id } = c.req.valid('param');
+
+		await deleteUser(id);
+
+		return c.json({ success: true });
 	}
 );
 
